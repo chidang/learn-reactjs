@@ -12,10 +12,10 @@ const App = props => {
     otherState: 'some other value'
   });
 
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     //DON'T DO THIS: personsState.persons[0].name = 'Chi Dang';
     setPersonState({persons: [
-      { name: 'Chi Dang', age: 32 },
+      { name: newName, age: 32 },
       { name: 'Khanh', age: 31},
       { name: 'Nhat', age: 4}
     ]});
@@ -24,10 +24,21 @@ const App = props => {
   return (
     <div className="App">
       <h1>This is my React App</h1>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age}/>
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My Hobbies: Racing</Person>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age}/>
+      <button onClick={() => switchNameHandler('Abc')}>Switch Name</button>
+      <Person 
+        name={personsState.persons[0].name} 
+        age={personsState.persons[0].age}
+      />
+      <Person 
+        name={personsState.persons[1].name} 
+        age={personsState.persons[1].age}
+        click={switchNameHandler.bind(this, 'New Name')}>
+      My Hobbies: Racing
+      </Person>
+      <Person 
+        name={personsState.persons[2].name} 
+        age={personsState.persons[2].age}
+      />
     </div>
   )
 }
