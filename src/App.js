@@ -22,6 +22,16 @@ const App = props => {
 
   }
 
+  const deletePersonHandler = (personIndex) => {
+    console.log(personIndex)
+    const persons = personsState.persons;
+    persons.splice(personIndex, 1);
+    setPersonState(prevState => ({
+      ...prevState,
+      persons: persons
+    }))
+  }
+
   const style = {
     backgroundColor: 'white',
     font: 'inherit',
@@ -36,10 +46,12 @@ const App = props => {
     persons = (
       <div>
         {
-          personsState.persons.map(person => {
-            return <Person 
+          personsState.persons.map((person, index) => {
+            console.log(index)
+            return <Person key={index}
               name={person.name} 
-              age={person.age} />
+              age={person.age}
+              click={(index) => deletePersonHandler(index) }/>
           })
         }
       </div>
