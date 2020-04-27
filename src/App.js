@@ -35,19 +35,13 @@ const App = props => {
   if(personsState.showPerson){
     persons = (
       <div>
-        <Person 
-          name={personsState.persons[0].name} 
-          age={personsState.persons[0].age}
-        />
-        <Person 
-          name={personsState.persons[1].name} 
-          age={personsState.persons[1].age}>
-        My Hobbies: Racing
-        </Person>
-        <Person 
-          name={personsState.persons[2].name} 
-          age={personsState.persons[2].age}
-        />
+        {
+          personsState.persons.map(person => {
+            return <Person 
+              name={person.name} 
+              age={person.age} />
+          })
+        }
       </div>
     )
   }
