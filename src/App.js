@@ -5,9 +5,9 @@ import Person from './Person/Person';
 const App = props => {
   const [ personsState, setPersonState ] = useState({
     persons: [
-      { name: 'Chi', age: 32 },
-      { name: 'Khanh', age: 31},
-      { name: 'Nhat', age: 4}
+      { id: 'a1', name: 'Chi', age: 32 },
+      { id: 'a2', name: 'Khanh', age: 31},
+      { id: 'a3', name: 'Nhat', age: 4}
     ],
     otherState: 'some other value',
     showPerson: false
@@ -47,11 +47,11 @@ const App = props => {
       <div>
         {
           personsState.persons.map((person, index) => {
-            console.log(index)
-            return <Person key={index}
+            return <Person 
+              key={person.id}
+              click={(index) => deletePersonHandler(index)}
               name={person.name} 
-              age={person.age}
-              click={(index) => deletePersonHandler(index) }/>
+              age={person.age} />
           })
         }
       </div>
