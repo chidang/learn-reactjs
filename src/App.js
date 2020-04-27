@@ -13,23 +13,6 @@ const App = props => {
     showPerson: false
   });
 
-  const switchNameHandler = (newName) => {
-    //DON'T DO THIS: personsState.persons[0].name = 'Chi Dang';
-    setPersonState({persons: [
-      { name: newName, age: 32 },
-      { name: 'Khanh', age: 31},
-      { name: 'Nhat', age: 4}
-    ]});
-  }
-
-  const nameChangeHandler = (event) => {
-    setPersonState({persons: [
-      { name: 'Chi', age: 32 },
-      { name: event.target.value, age: 31},
-      { name: 'Nhat', age: 4}
-    ]});
-  }
-
   const togglePersonsHandler = () => {
     const showPerson = personsState.showPerson
     setPersonState(prevState => ({
@@ -47,6 +30,28 @@ const App = props => {
     cursor: 'pointer'
   };
 
+  let persons = null;
+
+  if(personsState.showPerson){
+    persons = (
+      <div>
+        <Person 
+          name={personsState.persons[0].name} 
+          age={personsState.persons[0].age}
+        />
+        <Person 
+          name={personsState.persons[1].name} 
+          age={personsState.persons[1].age}>
+        My Hobbies: Racing
+        </Person>
+        <Person 
+          name={personsState.persons[2].name} 
+          age={personsState.persons[2].age}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="App">
       <h1>This is my React App</h1>
@@ -56,26 +61,7 @@ const App = props => {
       >
         Toggle Person
       </button>
-      {
-        personsState.showPerson ?
-        <div>
-          <Person 
-            name={personsState.persons[0].name} 
-            age={personsState.persons[0].age}
-          />
-          <Person 
-            name={personsState.persons[1].name} 
-            age={personsState.persons[1].age}
-            click={switchNameHandler.bind(this, 'New Name')}
-            change={nameChangeHandler}>
-          My Hobbies: Racing
-          </Person>
-          <Person 
-            name={personsState.persons[2].name} 
-            age={personsState.persons[2].age}
-          />
-        </div> : null
-      }
+      {persons}
     </div>
   )
 }
