@@ -9,7 +9,8 @@ const App = props => {
       { name: 'Khanh', age: 31},
       { name: 'Nhat', age: 4}
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPerson: false
   });
 
   const switchNameHandler = (newName) => {
@@ -29,25 +30,52 @@ const App = props => {
     ]});
   }
 
+  const togglePersonsHandler = () => {
+    const showPerson = personsState.showPerson
+    setPersonState(prevState => ({
+      ...prevState,
+      showPerson: !showPerson
+     }));
+
+  }
+
+  const style = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '2px solid blue',
+    padding: '5px',
+    cursor: 'pointer'
+  };
+
   return (
     <div className="App">
       <h1>This is my React App</h1>
-      <button onClick={() => switchNameHandler('Abc')}>Switch Name</button>
-      <Person 
-        name={personsState.persons[0].name} 
-        age={personsState.persons[0].age}
-      />
-      <Person 
-        name={personsState.persons[1].name} 
-        age={personsState.persons[1].age}
-        click={switchNameHandler.bind(this, 'New Name')}
-        change={nameChangeHandler}>
-      My Hobbies: Racing
-      </Person>
-      <Person 
-        name={personsState.persons[2].name} 
-        age={personsState.persons[2].age}
-      />
+      <button 
+        style={style}
+        onClick={() => togglePersonsHandler()}
+      >
+        Toggle Person
+      </button>
+      {
+        personsState.showPerson ?
+        <div>
+          <Person 
+            name={personsState.persons[0].name} 
+            age={personsState.persons[0].age}
+          />
+          <Person 
+            name={personsState.persons[1].name} 
+            age={personsState.persons[1].age}
+            click={switchNameHandler.bind(this, 'New Name')}
+            change={nameChangeHandler}>
+          My Hobbies: Racing
+          </Person>
+          <Person 
+            name={personsState.persons[2].name} 
+            age={personsState.persons[2].age}
+          />
+        </div> : null
+      }
     </div>
   )
 }
